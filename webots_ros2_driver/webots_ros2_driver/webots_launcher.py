@@ -58,7 +58,7 @@ class WebotsLauncher(ExecuteProcess):
                   'WSL (Windows Subsystem for Linux) environment instead.', file=sys.stderr)
             print('WARNING: Check https://github.com/cyberbotics/webots_ros2/wiki/Complete-Installation-Guide for more '
                   'information.', file=sys.stderr)
-        self.__is_wsl = is_wsl()
+        self.__is_wsl = False # HACK: Don't assume msys2 Webots install, we run inside wsl # is_wsl()
         self.__has_shared_folder = has_shared_folder()
         self.__is_supervisor = ros2_supervisor
         if self.__is_supervisor:
