@@ -24,7 +24,6 @@ namespace webots {
   class Radar : public Device {
   public:
     explicit Radar(const std::string &name) : Device(name) {}  // Use Robot::getRadar() instead
-    explicit Radar(WbDeviceTag tag) : Device(tag) {}
     virtual ~Radar() {}
     virtual void enable(int samplingPeriod);
     virtual void disable();

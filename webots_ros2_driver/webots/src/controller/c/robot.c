@@ -358,7 +358,8 @@ static void robot_configure(WbRequest *r) {
   robot.device[0]->name = request_read_string(r);
 
   WEBOTS_VERSION = request_read_string(r);
-  if (strlen(WEBOTS_VERSION) && (strncmp(WEBOTS_VERSION, LIBCONTROLLER_VERSION, 6)))
+  if (strlen(WEBOTS_VERSION) && (strlen(WEBOTS_VERSION) != strlen(LIBCONTROLLER_VERSION) ||
+                                 strncmp(WEBOTS_VERSION, LIBCONTROLLER_VERSION, strlen(WEBOTS_VERSION))))
     fprintf(stderr,
             "Warning: Webots [%s] and libController [%s] versions are not the same for Robot '%s'! Different versions can lead "
             "to undefined behavior.\n",
@@ -1165,7 +1166,7 @@ static char *compute_socket_filename(char *error_buffer) {
     struct stat filestat;
     double timestamp = 0.0;
     int number = -1;
-    const struct dirent *de;
+    struct dirent *de;
     while ((de = readdir(dr)) != NULL) {
 #ifndef _WIN32
       if (strcmp(de->d_name, ".") && strcmp(de->d_name, "..")) {
@@ -1266,7 +1267,7 @@ static char *compute_socket_filename(char *error_buffer) {
   free(loading_file_path);
 
   free(robot_name);
-  const char *sub_string = strstr(&WEBOTS_CONTROLLER_URL[6], "/");
+  char *sub_string = strstr(&WEBOTS_CONTROLLER_URL[6], "/");
   robot_name = encode_robot_name(sub_string ? sub_string + 1 : NULL);
   if (robot_name) {
 #ifndef _WIN32
@@ -1291,7 +1292,7 @@ static char *compute_socket_filename(char *error_buffer) {
     }
     char **filenames = NULL;
     int count = 0;
-    const struct dirent *de;
+    struct dirent *de;
     while ((de = readdir(dr)) != NULL) {
       if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
         continue;
@@ -1303,7 +1304,7 @@ static char *compute_socket_filename(char *error_buffer) {
       DIR *d = opendir(subfolder);
       free(subfolder);
       if (d) {
-        const struct dirent *sub;
+        struct dirent *sub;
         while ((sub = readdir(d)) != NULL) {
           if (strcmp(sub->d_name, "extern") == 0) {
             found = true;

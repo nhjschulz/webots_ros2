@@ -21,7 +21,6 @@ namespace webots {
   class Gyro : public Device {
   public:
     explicit Gyro(const std::string &name) : Device(name) {}  // Use Robot::getGyro() instead
-    explicit Gyro(WbDeviceTag tag) : Device(tag) {}
     virtual ~Gyro() {}
     virtual void enable(int samplingPeriod);
     virtual void disable();

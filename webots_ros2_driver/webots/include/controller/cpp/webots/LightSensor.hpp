@@ -21,7 +21,6 @@ namespace webots {
   class LightSensor : public Device {
   public:
     explicit LightSensor(const std::string &name) : Device(name) {}  // Use Robot::getLightSensor() instead
-    explicit LightSensor(WbDeviceTag tag) : Device(tag) {}
     virtual ~LightSensor() {}
     virtual void enable(int samplingPeriod);
     virtual void disable();

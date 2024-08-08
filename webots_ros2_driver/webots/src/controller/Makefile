@@ -32,7 +32,7 @@ release debug profile clean:
 	@echo "#"	
 	@echo "# Matlab controller library ("$@")"
 	@echo "#"
-	@+make -s -C matlab $@
+	#@+make -s -C matlab $@
 	@echo "#"	
 	@echo "# Controller launcher ("$@")"
 	@echo "#"

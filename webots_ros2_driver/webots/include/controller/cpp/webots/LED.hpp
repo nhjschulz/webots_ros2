@@ -21,7 +21,6 @@ namespace webots {
   class LED : public Device {
   public:
     explicit LED(const std::string &name) : Device(name) {}  // Use Robot::getLED() instead
-    explicit LED(WbDeviceTag tag) : Device(tag) {}
     virtual ~LED() {}
     virtual void set(int value);
     int get() const;

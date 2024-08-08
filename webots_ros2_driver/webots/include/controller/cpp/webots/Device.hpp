@@ -32,7 +32,6 @@ namespace webots {
 
   protected:
     explicit Device(const std::string &name);
-    explicit Device(WbDeviceTag tag);
 
   private:
     WbDeviceTag tag;
